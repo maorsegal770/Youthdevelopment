@@ -7,37 +7,6 @@
         "admin",
         "user"
       ]
-    },
-    "display_name": {
-      "type": "string",
-      "title": "שם מלא"
-    },
-    "phone": {
-      "type": "string",
-      "title": "טלפון"
-    },
-    "due_date": {
-      "type": "string",
-      "format": "date",
-      "title": "תאריך לידה משוער"
-    },
-    // Set only by backend functions (service role) after a verified Stripe payment.
-    // Users cannot change these fields themselves.
-    "subscription_status": {
-      "type": "string",
-      "title": "סטטוס מנוי",
-      "enum": ["pending_payment", "active", "canceled"],
-      "default": "pending_payment",
-      "rls": { "write": { "user_condition": { "role": "admin" } } }
-    },
-    "stripe_customer_id": {
-      "type": "string",
-      "rls": { "write": { "user_condition": { "role": "admin" } } }
-    },
-    "paid_at": {
-      "type": "string",
-      "format": "date-time",
-      "rls": { "write": { "user_condition": { "role": "admin" } } }
     }
   },
   "required": [

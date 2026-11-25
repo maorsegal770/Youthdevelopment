@@ -20,13 +20,6 @@ import Conversations from '@/pages/Conversations';
 import Podcast from '@/pages/Podcast';
 import Projects from '@/pages/Projects';
 import Tours from '@/pages/Tours';
-import BirthLayout from '@/birth/BirthLayout';
-import BirthLanding from '@/pages/birth/Landing';
-import BirthRegister from '@/pages/birth/BirthRegister';
-import BirthLogin from '@/pages/birth/BirthLogin';
-import BirthLessons from '@/pages/birth/Lessons';
-import BirthPaymentSuccess from '@/pages/birth/PaymentSuccess';
-import BirthLeads from '@/pages/birth/Leads';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -58,15 +51,6 @@ const AuthenticatedApp = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
-      {/* Birth-prep site: public landing + members area (access checked per page) */}
-      <Route path="/birth" element={<BirthLayout />}>
-        <Route index element={<BirthLanding />} />
-        <Route path="register" element={<BirthRegister />} />
-        <Route path="login" element={<BirthLogin />} />
-        <Route path="lessons" element={<BirthLessons />} />
-        <Route path="payment-success" element={<BirthPaymentSuccess />} />
-        <Route path="leads" element={<BirthLeads />} />
-      </Route>
       <Route element={<ProtectedRoute unauthenticatedElement={<Navigate to="/login" replace />} />}>
         <Route element={<Layout />}>
           <Route path="/" element={<Dashboard />} />

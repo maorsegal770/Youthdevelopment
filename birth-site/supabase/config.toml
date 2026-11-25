@@ -1,0 +1,30 @@
+# Supabase CLI config (only the parts this project changes).
+project_id = "birth-prep-site"
+
+[auth]
+site_url = "http://localhost:5173"
+additional_redirect_urls = ["http://localhost:5173/**"]
+minimum_password_length = 8
+
+[auth.email]
+enable_signup = true
+enable_confirmations = true
+otp_length = 6
+
+[auth.email.template.confirmation]
+subject = "קוד האימות שלך"
+content_path = "./supabase/templates/confirmation.html"
+
+# These functions authenticate the caller themselves (or are public),
+# so the gateway's JWT check is turned off for them.
+[functions.submit-lead]
+verify_jwt = false
+
+[functions.stripe-webhook]
+verify_jwt = false
+
+[functions.create-checkout]
+verify_jwt = false
+
+[functions.verify-checkout]
+verify_jwt = false

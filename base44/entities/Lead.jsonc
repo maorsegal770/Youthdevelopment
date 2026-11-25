@@ -1,0 +1,32 @@
+// Contact requests from the landing page. Created only via the submitLead
+// backend function; only admins can read or manage them.
+{
+  "name": "Lead",
+  "type": "object",
+  "properties": {
+    "full_name": { "type": "string", "title": "שם מלא" },
+    "phone": { "type": "string", "title": "טלפון" },
+    "email": { "type": "string", "title": "אימייל" },
+    "interest": {
+      "type": "string",
+      "title": "מעוניינת ב",
+      "enum": ["course", "doula", "consultation", "other"]
+    },
+    "due_date": { "type": "string", "format": "date", "title": "תאריך לידה משוער" },
+    "message": { "type": "string", "title": "הודעה" },
+    "status": {
+      "type": "string",
+      "title": "סטטוס טיפול",
+      "enum": ["new", "contacted", "closed"],
+      "default": "new"
+    },
+    "email_sent": { "type": "boolean", "title": "נשלח מייל" }
+  },
+  "required": ["full_name", "phone", "interest"],
+  "rls": {
+    "create": { "user_condition": { "role": "admin" } },
+    "read": { "user_condition": { "role": "admin" } },
+    "update": { "user_condition": { "role": "admin" } },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}

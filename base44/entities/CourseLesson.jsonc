@@ -1,0 +1,28 @@
+// Members-only course content. Readable only by paying members and admins.
+{
+  "name": "CourseLesson",
+  "type": "object",
+  "properties": {
+    "title": { "type": "string", "title": "כותרת השיעור" },
+    "module": { "type": "string", "title": "פרק" },
+    "summary": { "type": "string", "title": "תקציר" },
+    "body": { "type": "string", "title": "תוכן (Markdown)" },
+    "video_url": { "type": "string", "title": "קישור לווידאו" },
+    "attachment_url": { "type": "string", "title": "קובץ מצורף" },
+    "duration_minutes": { "type": "number", "title": "משך (דקות)" },
+    "order": { "type": "number", "title": "סדר", "default": 0 },
+    "published": { "type": "boolean", "title": "מפורסם", "default": true }
+  },
+  "required": ["title"],
+  "rls": {
+    "read": {
+      "$or": [
+        { "user_condition": { "role": "admin" } },
+        { "user_condition": { "subscription_status": "active" } }
+      ]
+    },
+    "create": { "user_condition": { "role": "admin" } },
+    "update": { "user_condition": { "role": "admin" } },
+    "delete": { "user_condition": { "role": "admin" } }
+  }
+}

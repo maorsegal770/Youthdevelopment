@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { supabase } from "./supabase";
+import { supabase, isConfigured } from "./supabase";
 
 const READONLY = ["id", "created_at", "updated_at"];
 const strip = (data) => Object.fromEntries(Object.entries(data).filter(([k]) => !READONLY.includes(k)));
@@ -12,6 +12,13 @@ export function useTable(table, { fallback = [], enabled = true } = {}) {
 
   const load = useCallback(async () => {
     if (!enabled) return;
+    if (!isConfigured) {
+      // No database yet (local preview): show the built-in content.
+      setItems(fallback);
+      setError(new Error("Supabase is not configured"));
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     const { data, error: err } = await supabase.from(table).select("*").order("sort_order", { ascending: true });
     if (err) {
